@@ -1,12 +1,14 @@
 import axios from 'axios';
 
-async function fetchData() {
+async function fetchPostsTitles() {
     try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        console.log(response.data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
+      const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      posts.slice(0, 5).forEach(({title}, index) =>{
+        console.log(`Post ${index + 1}: ${title}`)
+      })
+    } catch ({ message }) {
+      console.error('Error fetching posts:', message);
     }
-}
-
-fetchData()
+  }
+  
+  fetchPostsTitles();
